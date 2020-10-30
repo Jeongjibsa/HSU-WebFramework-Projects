@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<b:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:b="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/security https://www.springframework.org/schema/security/spring-security.xsd">
+	<authentication-manager>
+		<authentication-provider>
+			<jdbc-user-service data-source-ref="dataSource"
+				users-by-username-query="select username, password, enabled from users where username=?"
+				authorities-by-username-query="select username, authority from authorities where username=? " />
+		</authentication-provider>
+	</authentication-manager>
+
+	<!--
+ 	<http auto-config="true" use-expressions="true">
+		<intercept-url pattern="/" access="permitAll" />
+		<intercept-url pattern="/login" access="permitAll" />
+		<intercept-url pattern="/logout" access="permitAll" />
+		<intercept-url pattern="/offers" access="permitAll" />
+		<intercept-url pattern="/createOffer"
+			access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/resources/**"
+			access="permitAll" />
+		<intercept-url access="denyAll" pattern="/**" />
+		<form-login login-page="/login"
+			authentication-failure-url="/login?error" />
+		<logout />
+	</http>
+	-->
+	
+	<http auto-config="true" use-expressions="true">
+		<intercept-url pattern="/" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/login" access="permitAll" />
+		<intercept-url pattern="/logout" access="permitAll" />
+		<intercept-url pattern="/showCredit" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/showCreditDetail" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/showCurrent"
+			access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/createCourse"
+			access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/doCreateCourse"
+			access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/courseCreated"
+			access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/resources/**"
+			access="hasRole('ROLE_USER')" />
+		<intercept-url access="denyAll" pattern="/**" />
+		<form-login login-page="/login"
+			authentication-failure-url="/login?error" />
+		<logout />
+	</http>
+</b:beans>
