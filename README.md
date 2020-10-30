@@ -12,5 +12,4 @@
 8. helloSpringBoot
 9. oneToOne(Entity-Relationship)
 10. testHibernate
-11. eStore
-12. eStoreCustom
+11. eStoreCustom
